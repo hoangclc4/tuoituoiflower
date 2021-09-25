@@ -2,8 +2,8 @@
 const dbHost = process.env.DB_HOST || '127.0.0.1';
 const dbPort = process.env.DB_PORT || 27017;
 const dbName = process.env.DB_NAME || 'shop';
-const dbUser = process.env.DB_USER || '';
-const dbPass = process.env.DB_PASS || '';
+const dbUser = process.env.DB_USER || 'root';
+const dbPass = process.env.DB_PASS || 'hoatuoiT4s';
 const dbCred =
 	dbUser.length > 0 || dbPass.length > 0 ? `${dbUser}:${dbPass}@` : '';
 
@@ -36,14 +36,14 @@ module.exports = {
 		secure: true,
 		user: '',
 		pass: '',
-		fromName: 'Cezerin',
-		fromAddress: 'vam@test.com'
+		fromName: 'shophoatuoituoi',
+		fromAddress: 'tuoituoishop@gmail.com'
 	},
 	// key to sign tokens
-	jwtSecretKey: '-',
+	jwtSecretKey: 'hoatuoiT4s',
 
 	// key to sign store cookies
-	cookieSecretKey: '-',
+	cookieSecretKey: 'hoatuoiT4s',
 
 	// path to uploads
 	categoriesUploadPath: 'public/content/images/categories',
