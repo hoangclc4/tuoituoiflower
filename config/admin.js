@@ -9,5 +9,5 @@ module.exports = {
 	language: 'en',
 	apiBaseUrl: `${fullBaseUrl}/api/v1`,
 	apiWebSocketUrl,
-	developerMode: false
+	developerMode: true
 };

@@ -11,7 +11,7 @@ class MapYand extends Component {
 
 	static defaultProps = {
 		mapState: {
-			center: [55.83342, 49.050422],
+			center: [10.8439968, 106.7414595],
 			zoom: 14,
 			behaviors: ["disable('scrollZoom')", 'drag'],
 			controls: []
@@ -27,7 +27,7 @@ class MapYand extends Component {
 	render() {
 		return (
 			<Fragment>
-				<YMaps>
+				<YMaps query={{ lang: 'vi_VN' }}>
 					<Map
 						defaultState={this.props.mapState}
 						modules={['templateLayoutFactory', 'layout.ImageWithContent']}
@@ -36,8 +36,9 @@ class MapYand extends Component {
 							geometry={this.props.mapState.center}
 							options={this.props.placeMarkOptions}
 							properties={{
-								hintContent: 'Наш магазин',
-								balloonContent: 'г.Казань, ул.Восстания, д.100'
+								hintContent: 'Cửa hàng của chúng tôi',
+								balloonContent:
+									'Cổng 1 Chung Cư 4s Linh Đông đường 30, phường Linh Đông, Q Thủ Đức'
 							}}
 						/>
 						<ZoomControl

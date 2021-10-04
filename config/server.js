@@ -28,7 +28,7 @@ module.exports = {
 	ajaxBaseUrl: `${fullBaseBEUrl}/ajax`,
 
 	// Access-Control-Allow-Origin
-	storeBaseUrl: `${fullBaseFEUrl}`,
+	storeBaseUrl: `http://localhost:3000`,
 
 	// used by API
 	adminLoginUrl: '/admin/login',
@@ -77,5 +77,5 @@ module.exports = {
 	// for production: recommended salRounds > 12
 	saltRounds: process.env.SALT_ROUNDS || 12,
 
-	developerMode: false
+	developerMode: true
 };
