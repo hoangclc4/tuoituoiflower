@@ -42,11 +42,11 @@
 }
 
 .logo-image {
-    max-width: 110px;
-    max-height: 33px;
+    max-width: 132px;
+    max-height: 67px;
     img {
-        max-height: 33px;
-        max-width: 110px;
+        max-height: 67px;
+        max-width: 132px;
         margin: 0 auto;
         display: block;
     }
@@ -93,7 +93,7 @@
     right: -14px;
     height: 26px;
     width: 26px;
-    background-color: $choco;
+    background-color: $custom-color;
     color: #fff;
     line-height: 28px;
     font-size: 15px;
@@ -262,7 +262,6 @@
     }
     @media (max-width: $tablet-width) {
         &:before {
-            content: '%';
             font-size: 22px;
             line-height: 25px;
             margin-right: 10px;
@@ -285,7 +284,7 @@
         font-weight: bold;
         font-size: 14px;
         line-height: 16px;
-        color: $choco;
+        color: $custom-color;
         position: relative;
         &:after {
             content: '';
@@ -374,7 +373,7 @@ MOBILE
     top: 0;
     position: absolute;
     span {
-        background-color: $choco;
+        background-color: $custom-color;
     }
 }
 

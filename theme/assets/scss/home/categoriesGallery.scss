@@ -83,7 +83,7 @@
             background: $border;
         }
         .image-gallery-bullet.active {
-            background: $choco;
+            background: $custom-color;
         }
     }
 }
@@ -256,7 +256,7 @@
                 flex: none;
                 width: 62px;
                 &.slick-active {
-                    background: $choco;
+                    background: $custom-color;
                 }
             }
             button {

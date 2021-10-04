@@ -31,13 +31,12 @@ export default class CartIndicator extends React.PureComponent {
 
 	render() {
 		const { cart, onClick, cartIsActive, settings } = this.props;
-
 		if (cart) {
 			this.setState({ subtotal: cart.subtotal });
 			if (Lscache.get('auth_data')) {
 				this.setState({ subtotal: Math.ceil(cart.subtotal * 0.7) });
 			}
-		}
+		} else this.setState({ subtotal: 0 });
 
 		return (
 			<div className="header__cart">

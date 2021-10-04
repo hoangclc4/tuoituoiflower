@@ -38,7 +38,7 @@
             background: $border;
         }
         .image-gallery-bullet.active {
-            background: $choco;
+            background: $custom-color;
         }
     }
     .image-gallery-slides {
@@ -139,13 +139,13 @@
     margin: auto 0 0;
     pointer-events: initial;
     .is-success {
-        background-color: $choco;
+        background-color: $custom-color;
         &:active,
         &:hover {
-            background-color: $choco-light;
+            background-color: $custom-color-light;
         }
         &:focus:not(:active) {
-            box-shadow: 0 0 0 0.125em $choco;
+            box-shadow: 0 0 0 0.125em $custom-color;
         }
     }
 }

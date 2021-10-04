@@ -1,4 +1,5 @@
-/* eslint-disable */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable import/no-unresolved */
 
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
@@ -7,12 +8,12 @@ import Paper from 'material-ui/Paper';
 import messages from 'lib/text';
 import api from 'lib/api';
 
-const Fragment = React.Fragment;
+const { Fragment } = React;
 const updateProductArray = [];
 const categoryIdArray = [];
 const imageFilesArray = [];
 
-//const API = 'https://sheets.googleapis.com/v4/spreadsheets/1eEa-9dERtjug9rGAycjDjA7L2imu-53-44kkqrmro9c/values:batchGet?ranges=basedata&majorDimension=ROWS&key=AIzaSyCPK118zWL9Qqhl8Lsa3yQoo6YeccpoDKM';
+// const API = 'https://sheets.googleapis.com/v4/spreadsheets/1eEa-9dERtjug9rGAycjDjA7L2imu-53-44kkqrmro9c/values:batchGet?ranges=basedata&majorDimension=ROWS&key=AIzaSyCPK118zWL9Qqhl8Lsa3yQoo6YeccpoDKM';
 
 /**
  * Google Spreadsheet product import mapping
@@ -22,7 +23,7 @@ const imageFilesArray = [];
  *
  * @returns {undefined}
  */
-class ProductImport extends React.Component {
+export default class ProductImport extends React.Component {
 	constructor(props) {
 		super();
 		this.state = {
@@ -37,6 +38,7 @@ class ProductImport extends React.Component {
 		this.fetchData = this.fetchData.bind(this);
 		this.deleteProducts = this.deleteProducts.bind(this);
 		this.uploadProducts = this.uploadProducts.bind(this);
+		this.importData = this.importData.bind(this);
 	}
 
 	/**
@@ -44,7 +46,145 @@ class ProductImport extends React.Component {
 	 *
 	 * @returns {undefined}
 	 */
-	fetchData = () => {
+	importData = async () => {
+		this.loader.current.style.setProperty('display', 'inline-block');
+		const filter = {
+			fields:
+				'id,name,category_id,category_ids,category_name,sku,images,enabled,discontinued,stock_status,stock_quantity,price,on_sale,regular_price,url'
+		};
+		const products = await api.products.list(filter);
+		console.log(products);
+
+		// delete product
+		if (products.json.data && products.json.data.length) {
+			for (let i = 0; i < products.json.data.length; i++) {
+				console.log('delete product', products.json.data[i].name);
+				await api.products.delete(products.json.data[i].id);
+			}
+		}
+		// delete category
+		const categories = await api.productCategories.list();
+
+		if (categories.json && categories.json.length) {
+			for (let i = 0; i < categories.json.length; i++) {
+				console.log('delete category', categories.json[i].name);
+				await api.productCategories.delete(categories.json[i].id);
+			}
+		}
+		let categoryAdd = [...this.state.product_items];
+		categoryAdd.shift();
+		const product_items = categoryAdd;
+		categoryAdd = categoryAdd.reduce((unique, o) => {
+			if (
+				!unique.some(
+					obj =>
+						obj.category_name === o.category_name &&
+						obj.sub_category_name === o.sub_category_name
+				)
+			) {
+				unique.push(o);
+			}
+			return unique;
+		}, []);
+		const addedCategory = [];
+		console.log('categoryAdd', categoryAdd);
+		for (let i = 0; i < categoryAdd.length; i++) {
+			let checkCate = addedCategory.filter(
+				cate => cate.json.name === categoryAdd[i].category_name
+			);
+			console.log(checkCate);
+			if (!checkCate.length) {
+				console.log(i);
+				const newCate = await api.productCategories.create({
+					enabled: true,
+					name: categoryAdd[i].category_name
+				});
+				addedCategory.push(newCate);
+				checkCate = [newCate];
+			}
+			if (categoryAdd[i].sub_category_name) {
+				const subCategory = await api.productCategories.create({
+					enabled: true,
+					name: categoryAdd[i].sub_category_name,
+					parent_id: checkCate[0].json.id
+				});
+				addedCategory.push(subCategory);
+			}
+		}
+		const statusCell = document.getElementsByClassName('sheet-cell-state');
+		let errorsCounter = this.state.errors;
+		console.log('addedCategory', addedCategory);
+		console.log('product_items', product_items);
+
+		for (let i = 0; i < product_items.length; i++) {
+			const productDraft = {
+				enabled: true,
+				category_id: null,
+				category_ids: [],
+				category_name: null, // '5b8903f864300c8663503ad6',
+				stock_quantity: null,
+				regular_price: null,
+				name: null,
+				sku: null,
+				path: null
+			};
+			if (product_items[i] !== undefined) {
+				productDraft.category_name = product_items[i].category_name;
+				productDraft.sub_category_name = product_items[i].sub_category_name;
+				productDraft.name = product_items[i].name;
+				productDraft.stock_quantity = product_items[i].stock_quantity;
+				productDraft.regular_price = product_items[i].regular_price;
+				productDraft.enabled = product_items[i].enabled;
+				productDraft.sku = product_items[i].sku;
+				productDraft.path = product_items[i].images;
+
+				if (
+					productDraft.category_name !== '' &&
+					productDraft.name !== '' &&
+					productDraft.stock_quantity !== '' &&
+					productDraft.regular_price !== '' &&
+					productDraft.sku !== '' &&
+					productDraft.path !== ''
+				) {
+					//
+				} else {
+					errorsCounter += 1;
+					this.setState({ errors: errorsCounter });
+				}
+				for (let j = 0; j < addedCategory.length; j++) {
+					if (
+						productDraft.sub_category_name &&
+						productDraft.sub_category_name === addedCategory[j].json.name
+					) {
+						productDraft.category_ids.push(addedCategory[j].json.id);
+						productDraft.category_id = addedCategory[j].json.id;
+						break;
+					} else if (
+						productDraft.category_name === addedCategory[j].json.name
+					) {
+						productDraft.category_ids.push(addedCategory[j].json.id);
+						productDraft.category_id = addedCategory[j].json.id;
+					}
+				}
+				console.log('productDraft', productDraft);
+				const newProd = await api.products.create(productDraft);
+				statusCell[i].innerHTML = '&#x2713;';
+				statusCell[i].style.color = 'green';
+				imageFilesArray.push({
+					id: newProd.json.id,
+					url: productDraft.path.split(',')
+				});
+			} else {
+				errorsCounter += 1;
+				this.setState({ errors: errorsCounter });
+			}
+		}
+		await this.uploadImages();
+		console.log('done');
+		this.loader.current.style.setProperty('display', 'none');
+	};
+
+	fetchData = async () => {
 		this.loader.current.style.setProperty('display', 'inline-block');
 		const filter = {
 			fields:
@@ -60,7 +200,7 @@ class ProductImport extends React.Component {
 					return;
 				}
 
-				for (let i in json.data) {
+				for (const i in json.data) {
 					this.deleteProducts(json.data[i].id, json.data.length);
 					if (json.data[i].images.length > 0) {
 						api.products.images.delete(
@@ -83,7 +223,7 @@ class ProductImport extends React.Component {
 	deleteProducts(id, arrayLength) {
 		api.products.delete(id).then(() => {
 			if (parseInt(this.state.deleteCounter) === parseInt(arrayLength)) {
-				this.uploadProducts(); //upload just once
+				this.uploadProducts(); // upload just once
 			}
 			this.setState({ deleteCounter: this.state.deleteCounter + 1 });
 		});
@@ -104,7 +244,7 @@ class ProductImport extends React.Component {
 				enabled: true,
 				category_id: null,
 				category_ids: [],
-				category_name: null, //'5b8903f864300c8663503ad6',
+				category_name: null, // '5b8903f864300c8663503ad6',
 				stock_quantity: null,
 				regular_price: null,
 				name: null,
@@ -112,22 +252,18 @@ class ProductImport extends React.Component {
 				path: null
 			};
 			if (this.state.product_items[i] !== undefined) {
-				productDraft.category_name = this.state.product_items[i][
-					'category_name'
-				];
-				productDraft.sub_category_name = this.state.product_items[i][
-					'sub_category_name'
-				];
-				productDraft.name = this.state.product_items[i]['name'];
-				productDraft.stock_quantity = this.state.product_items[i][
-					'stock_quantity'
-				];
-				productDraft.regular_price = this.state.product_items[i][
-					'regular_price'
-				];
-				productDraft.enabled = this.state.product_items[i]['enabled'];
-				productDraft.sku = this.state.product_items[i]['sku'];
-				productDraft.path = this.state.product_items[i]['images'];
+				productDraft.category_name = this.state.product_items[i].category_name;
+				productDraft.sub_category_name = this.state.product_items[
+					i
+				].sub_category_name;
+				productDraft.name = this.state.product_items[i].name;
+				productDraft.stock_quantity = this.state.product_items[
+					i
+				].stock_quantity;
+				productDraft.regular_price = this.state.product_items[i].regular_price;
+				productDraft.enabled = this.state.product_items[i].enabled;
+				productDraft.sku = this.state.product_items[i].sku;
+				productDraft.path = this.state.product_items[i].images;
 
 				if (
 					productDraft.category_name !== '' &&
@@ -284,10 +420,10 @@ class ProductImport extends React.Component {
 								.then(({ status, json }) => {
 									elem.draft.category_id = json.id;
 									elem.draft.category_ids.push(json.id);
-									if (j === updateProductArray.length - 1) {
-										this.updateProduct();
-									}
+									this.updateProduct(elem, j);
 								});
+						} else {
+							this.updateProduct(elem, j);
 						}
 					}
 				});
@@ -300,14 +436,14 @@ class ProductImport extends React.Component {
 	 *
 	 * @returns {Boolean} true if there is no products
 	 */
-	updateProduct() {
+	updateProduct(elem, i) {
 		const that = this;
-		/*let uniqProductArray = updateProductArray.reduce((unique, o) => {
+		/* let uniqProductArray = updateProductArray.reduce((unique, o) => {
 			if(!unique.some(obj => obj.category_name === o.category_name)) {
 			  unique.push(o);
 			}
 			return unique;
-		},[]);*/
+		},[]); */
 
 		updateProductArray.some((pArrayItem, i) => {
 			if (pArrayItem === undefined) {
@@ -346,20 +482,23 @@ class ProductImport extends React.Component {
 				aFile.url.forEach(imageFile => {
 					json.forEach(jFile => {
 						if (imageFile === jFile.file) {
-							let xhr = new XMLHttpRequest();
-							xhr.open('GET', '/' + jFile.file, true);
+							const xhr = new XMLHttpRequest();
+							xhr.open('GET', `/${jFile.file}`, true);
 							xhr.responseType = 'arraybuffer';
-							var form = null;
-
+							let form = null;
 							xhr.onload = function(e) {
 								// Obtain a blob: URL for the image data.
-								var arrayBufferView = new Uint8Array(this.response);
-								var blob = new Blob([arrayBufferView], { type: 'image/jpeg' });
-								var urlCreator = window.URL || window.webkitURL;
-								let imageUrl = urlCreator.createObjectURL(blob);
+								const arrayBufferView = new Uint8Array(this.response);
+								const blob = new Blob([arrayBufferView], {
+									type: 'image/jpeg'
+								});
+								const urlCreator = window.URL || window.webkitURL;
+								const imageUrl = urlCreator.createObjectURL(blob);
 
-								let files = new File([blob], imageFile, { type: 'image/jpeg' });
-								files['preview'] = imageUrl;
+								const files = new File([blob], imageFile, {
+									type: 'image/jpeg'
+								});
+								files.preview = imageUrl;
 
 								form = new FormData();
 								form.append('file', files);
@@ -412,7 +551,7 @@ class ProductImport extends React.Component {
 
 					this.setState({ product_items: rows });
 
-					let status = document.getElementsByClassName('sheet-cell-state');
+					const status = document.getElementsByClassName('sheet-cell-state');
 					[].slice.call(status).forEach((element, i) => {
 						if (i === 0) {
 							return;
@@ -428,7 +567,6 @@ class ProductImport extends React.Component {
 
 	render() {
 		const { onImportProducts, files } = this.props;
-
 		let keyCounter = 0;
 		const listHeader = this.state.product_items.map((p, j) => {
 			if (j < 1) {
@@ -436,25 +574,23 @@ class ProductImport extends React.Component {
 					<tr className="tr-header" key={keyCounter}>
 						{Object.keys(p)
 							.filter(k => k !== 'id')
-							.map((k, i) => {
-								return (
-									<th className="td-header" key={keyCounter + i}>
-										<div
-											ref="status"
-											className={
-												k === 'state' ? 'sheet-cell-state' : 'sheet-cell-' + i
-											}
-											suppressContentEditableWarning="true"
-											key={p[i] + j + i + p[j]}
-											contentEditable="true"
-											value={k}
-											onInput={this.editColumn}
-										>
-											{p[k]}
-										</div>
-									</th>
-								);
-							})}
+							.map((k, i) => (
+								<th className="td-header" key={keyCounter + i}>
+									<div
+										ref="status"
+										className={
+											k === 'state' ? 'sheet-cell-state' : `sheet-cell-${i}`
+										}
+										suppressContentEditableWarning="true"
+										key={p[i] + j + i + p[j]}
+										contentEditable="true"
+										value={k}
+										onInput={this.editColumn}
+									>
+										{p[k]}
+									</div>
+								</th>
+							))}
 					</tr>
 				);
 			}
@@ -466,24 +602,22 @@ class ProductImport extends React.Component {
 					<tr className="tr-body" key={keyCounter + j}>
 						{Object.keys(p)
 							.filter(k => k !== 'id')
-							.map((k, i) => {
-								return (
-									<td className="td-body" key={keyCounter + i}>
-										<div
-											className={
-												k === 'state' ? 'sheet-cell-state' : 'sheet-cell-' + i
-											}
-											suppressContentEditableWarning="true"
-											key={p[i] + j + i + p[j]}
-											contentEditable="true"
-											value={k}
-											onInput={this.editColumn}
-										>
-											{p[k]}
-										</div>
-									</td>
-								);
-							})}
+							.map((k, i) => (
+								<td className="td-body" key={keyCounter + i}>
+									<div
+										className={
+											k === 'state' ? 'sheet-cell-state' : `sheet-cell-${i}`
+										}
+										suppressContentEditableWarning="true"
+										key={p[i] + j + i + p[j]}
+										contentEditable="true"
+										value={k}
+										onInput={this.editColumn}
+									>
+										{p[k]}
+									</div>
+								</td>
+							))}
 					</tr>
 				);
 			}
@@ -513,10 +647,7 @@ class ProductImport extends React.Component {
 								{messages.settings_googlesheet_uploaded}{' '}
 								{this.state.uploadedProducts}
 								{this.state.errors > 0
-									? '/ ' +
-									  messages.settings_googlesheet_errors +
-									  ' ' +
-									  this.state.errors
+									? `/ ${messages.settings_googlesheet_errors} ${this.state.errors}`
 									: ''}
 								{this.state.errors > 0 ? this.state.errors : null}
 								<h3 className="dashboardErrorResponse">
@@ -575,10 +706,10 @@ class ProductImport extends React.Component {
 								<FlatButton
 									label={messages.import}
 									files={files}
-									primary={true}
-									keyboardFocused={true}
-									onClick={this.fetchData}
-									className={'spread-sheet-save-btn'}
+									primary
+									keyboardFocused
+									onClick={this.importData}
+									className="spread-sheet-save-btn"
 								/>
 							</div>
 						</Paper>
@@ -589,7 +720,6 @@ class ProductImport extends React.Component {
 	}
 }
 
-/*ProductImport.propTypes = {
+/* ProductImport.propTypes = {
 	onStartImportProducts: PropTypes.func.isRequired
-}*/
-module.exports = ProductImport;
+} */

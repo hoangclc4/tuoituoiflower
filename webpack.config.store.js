@@ -43,8 +43,18 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['env', 'react'],
-						plugins: ['transform-class-properties']
+						presets: [
+							[
+								'@babel/preset-env',
+								{
+									targets: {
+										node: '10' // the target node version, boolean true, or "current".
+									}
+								}
+							],
+							'@babel/preset-react'
+						],
+						plugins: ['@babel/plugin-syntax-jsx']
 					}
 				}
 			},

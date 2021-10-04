@@ -91,7 +91,7 @@
         border-radius: 172px;
         top: -53px;
         left: -47px;
-        background-color: $choco;
+        background-color: $custom-color;
         z-index: 2;
         @media screen and (min-width: $mintablet-width) {
             width: 70%;
@@ -173,7 +173,7 @@
 }
 
 .image-gallery-bullets .image-gallery-bullet.active {
-    background: $choco;
+    background: $custom-color;
 }
 
 @media screen and (min-width: $vtablet-width) {

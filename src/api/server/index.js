@@ -7,6 +7,7 @@ import winston from 'winston';
 import logger from './lib/logger';
 import settings from './lib/settings';
 import security from './lib/security';
+// eslint-disable-next-line no-unused-vars
 import { db } from './lib/mongo';
 import dashboardWebSocket from './lib/dashboardWebSocket';
 import ajaxRouter from './ajaxRouter';

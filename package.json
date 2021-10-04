@@ -32,16 +32,18 @@
     "url": "https://github.com/cezerin/cezerin"
   },
   "scripts": {
+    "start:dev": "nodemon -r esm dist/store/server/index.js",
+    "start-api:dev": "nodemon -r esm src/api/server/index.js",
     "setup": "node -r esm src/api/server/setup.js",
-    "compile": "babel src/store -d dist/store --presets react --plugins transform-class-properties --quiet",
-    "compile:watch": "concurrently -n storeWatcher,themeWatcher \"babel src/store -d dist/store --presets react --plugins transform-class-properties --watch\" \"babel theme/src -d theme/dist --presets react --plugins transform-class-properties --watch\"",
+    "compile": "babel src/store -d dist/store --presets @babel/preset-react --plugins transform-class-properties --quiet",
+    "compile:watch": "concurrently -n storeWatcher,themeWatcher \"babel src/store -d dist/store --presets @babel/preset-react --plugins transform-class-properties --watch\" \"babel theme/src -d theme/dist --presets @babel/preset-react --plugins transform-class-properties --watch\"",
     "webpack:admin": "webpack --config webpack.config.admin.js --mode production",
     "webpack:store": "webpack --config webpack.config.store.js --mode production",
     "webpack:admin:watch": "webpack --config webpack.config.admin.js --mode development --watch",
     "webpack:store:watch": "webpack --config webpack.config.store.js --mode development --watch",
     "theme:install": "./scripts/theme-install.sh",
     "theme:export": "./scripts/theme-export.sh",
-    "theme:build": "babel theme/src -d theme/dist --presets react --plugins transform-class-properties --quiet && npm run webpack:store",
+    "theme:build": "babel theme/src -d theme/dist --presets @babel/preset-react --plugins transform-class-properties --quiet && npm run webpack:store",
     "build": "npm run compile && npm run theme:build && npm run webpack:admin",
     "build:watch": "concurrently -n compile,webpackStore,webpackAdmin \"npm run compile:watch\" \"npm run webpack:store:watch\" \"npm run webpack:admin:watch\"",
     "lint": "eslint .",
@@ -59,14 +61,8 @@
     ]
   },
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.6",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "@babel/core": "^7.15.5",
+    "babel-loader": "^8.2.2",
     "bcrypt": "^3.0.7",
     "body-parser": "^1.18.3",
     "cezerin2-client": "^0.36.0",
@@ -146,7 +142,19 @@
     "ws": "^6.0.0"
   },
   "engines": {
-    "node": "^8.0.0",
-    "npm": "^5.0.0"
+    "node": "^14.17.6",
+    "npm": "^6.14.15"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/plugin-syntax-jsx": "^7.14.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-react-remove-properties": "^0.3.0",
+    "babel-polyfill": "^6.26.0",
+    "nodemon": "^2.0.13"
   }
 }

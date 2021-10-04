@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const applicationConfig = require('./config/admin.js');
+// eslint-disable-next-line import/no-dynamic-require
 const applicationText = require(`./locales/${applicationConfig.language}.json`);
 
 module.exports = {
@@ -66,8 +67,18 @@ module.exports = {
 						use: {
 							loader: 'babel-loader',
 							options: {
-								presets: ['env', 'react'],
-								plugins: ['transform-class-properties']
+								presets: [
+									[
+										'@babel/preset-env',
+										{
+											targets: {
+												node: '10' // the target node version, boolean true, or "current".
+											}
+										}
+									],
+									'@babel/preset-react'
+								],
+								plugins: ['@babel/plugin-syntax-jsx']
 							}
 						}
 					},

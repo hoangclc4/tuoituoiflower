@@ -103,7 +103,7 @@ const CategoryContainer = props => {
 			<section className="category section-container">
 				<div className="category__aside">
 					{showFilter === true && <ProductFilter {...props} />}
-					<BannerAside />
+					{/* <BannerAside /> */}
 				</div>
 				<div className="category__products">
 					<ProductList

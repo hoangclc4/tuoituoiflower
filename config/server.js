@@ -1,4 +1,10 @@
+/* eslint-disable no-unused-vars */
 // config used by server side only
+const {
+	FULL_BASE_BE_URL,
+	FULL_BASE_FE_URL,
+	DB_URL
+} = require('./local-base-url');
 const dbHost = process.env.DB_HOST || '127.0.0.1';
 const dbPort = process.env.DB_PORT || 27017;
 const dbName = process.env.DB_NAME || 'shop';
@@ -7,18 +13,22 @@ const dbPass = process.env.DB_PASS || '';
 const dbCred =
 	dbUser.length > 0 || dbPass.length > 0 ? `${dbUser}:${dbPass}@` : '';
 
+// const dbUrl = DB_URL || `mongodb://${dbCred}${dbHost}:${dbPort}/${dbName}`;
 const dbUrl =
-	process.env.DB_URL || `mongodb://${dbCred}${dbHost}:${dbPort}/${dbName}`;
+	DB_URL ||
+	`mongodb+srv://root:hoatuoiT4s@tuoituoiflowercluster.mbqhk.mongodb.net/shop?retryWrites=true&w=majority`;
+const fullBaseBEUrl = FULL_BASE_BE_URL || `https://shophoatuoituoi.com`;
+const fullBaseFEUrl = FULL_BASE_FE_URL || `https://shophoatuoituoi.com`;
 
 module.exports = {
 	// used by Store (server side)
-	apiBaseUrl: `http://178.128.52.127:3001/api/v1`,
+	apiBaseUrl: `${fullBaseBEUrl}/api/v1`,
 
 	// used by Store (server and client side)
-	ajaxBaseUrl: `http://178.128.52.127:3001/ajax`,
+	ajaxBaseUrl: `${fullBaseBEUrl}/ajax`,
 
 	// Access-Control-Allow-Origin
-	storeBaseUrl: `http://178.128.52.127:3000`,
+	storeBaseUrl: `${fullBaseFEUrl}`,
 
 	// used by API
 	adminLoginUrl: '/admin/login',
@@ -31,13 +41,13 @@ module.exports = {
 
 	// your shop smtp settings
 	smtpServer: {
-		host: '',
+		host: 'smtp.gmail.com',
 		port: 465,
 		secure: true,
-		user: '',
-		pass: '',
-		fromName: 'shophoatuoituoi',
-		fromAddress: 'tuoituoishop@gmail.com'
+		user: 'tuoituoiflower@gmail.com',
+		pass: 'hoatuoiT4s',
+		fromName: 'Shop Hoa Tươi Tươi',
+		fromAddress: 'tuoituoiflower@gmail.com'
 	},
 	// key to sign tokens
 	jwtSecretKey: 'hoatuoiT4s',
@@ -67,5 +77,5 @@ module.exports = {
 	// for production: recommended salRounds > 12
 	saltRounds: process.env.SALT_ROUNDS || 12,
 
-	developerMode: true
+	developerMode: false
 };

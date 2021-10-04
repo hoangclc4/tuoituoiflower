@@ -7,13 +7,13 @@ export const advantagesData = [
 	},
 	{
 		id: 'adv2',
-		name: 'Fast Delivery',
+		name: 'Giao hàng nhanh chóng',
 		icon: '/assets/images/icons/adv_truck.svg',
 		path: ''
 	},
 	{
 		id: 'adv3',
-		name: 'Customer Protect',
+		name: 'Hỗ trợ khách hàng',
 		icon: '/assets/images/icons/adv_cert.svg',
 		path: ''
 	},

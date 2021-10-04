@@ -1,6 +1,9 @@
 // config used by store client side only
+const { FULL_BASE_BE_URL } = require('./local-base-url');
+const fullBaseUrl = FULL_BASE_BE_URL || `https://shophoatuoituoi.com`;
+
 module.exports = {
 	// store UI language
 	language: 'en',
-	ajaxBaseUrl: 'http://178.128.52.127:3001/ajax'
+	ajaxBaseUrl: `${fullBaseUrl}/ajax`
 };
