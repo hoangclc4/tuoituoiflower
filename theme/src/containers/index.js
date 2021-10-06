@@ -45,7 +45,7 @@ const IndexContainer = props => {
 				</section>
 			)}
 			<section className="advantages section-container">
-				<h2 className="advantages__title section__title">Advantages</h2>
+				<h2 className="advantages__title section__title">Dịch vụ</h2>
 				<div className="advantages__items">
 					{advantages.map(item => (
 						<div className="advantages__item" key={item.id}>
@@ -57,7 +57,7 @@ const IndexContainer = props => {
 			</section>
 
 			<section className="categories section-container">
-				<h2 className="categories__title section__title">Categories</h2>
+				<h2 className="categories__title section__title">Danh mục sản phẩm</h2>
 
 				<CategoriesGallery categories={categories} />
 			</section>
@@ -94,13 +94,13 @@ const IndexContainer = props => {
 			)}
 
 			<section className="contacts section-container">
-				<h2 className="contacts__title_content section__title">Contacts</h2>
+				<h2 className="contacts__title_content section__title">Liên hệ</h2>
 				<div className="contacts__content">
 					<LazyLoad>
 						<HomeContacts settings={settings} />
 					</LazyLoad>
 				</div>
-				<h2 className="contacts__title_map section__title">Map</h2>
+				<h2 className="contacts__title_map section__title">Bản đồ</h2>
 				<div className="contacts__map">
 					<LazyLoad>
 						<MapYand />

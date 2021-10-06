@@ -247,10 +247,10 @@ export default class Header extends React.Component {
 								<span className="header-contacts__icon header-contacts__icon_time">
 									<img src="/assets/images/icons/clocks.svg" alt="" title="" />
 								</span>
-								10:00 – 22:00
+								7h-20h
 							</div>
 							<a
-								href="tel:+10000000000"
+								href="tel:0899089399"
 								className="header-contacts__phone header-contacts__item"
 							>
 								<span className="header-contacts__icon header-contacts__icon_phone">
@@ -260,21 +260,7 @@ export default class Header extends React.Component {
 										title=""
 									/>
 								</span>
-								+1 (000) 000-00-00
-							</a>
-							<a
-								href="https://wa.me/10000000000"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="header-contacts__item"
-							>
-								<span className="header-contacts__icon header-contacts__icon_whatsapp">
-									<img
-										src="/assets/images/icons/whatsapp.svg"
-										alt=""
-										title=""
-									/>
-								</span>
+								089 908 93 99
 							</a>
 						</div>
 
@@ -332,7 +318,7 @@ export default class Header extends React.Component {
 									alt=""
 									title=""
 								/>
-								Catalog
+								Sản Phẩm
 							</button>
 							<nav className="navigation__menu">
 								<HeaderBottomMenu items={themeSettings.footer_menu_2_items} />
@@ -387,7 +373,7 @@ export default class Header extends React.Component {
 							10:00 – 22:00
 						</div>
 						<a
-							href="tel:+10000000000"
+							href="tel:0899089399"
 							className="header-contacts__phone header-contacts__item"
 						>
 							<span className="header-contacts__icon">
@@ -397,16 +383,7 @@ export default class Header extends React.Component {
 									title=""
 								/>
 							</span>
-							+1 (000) 000-00-00
-						</a>
-						<a
-							href="https://wa.me/10000000000"
-							target="_blank"
-							className=" header-contacts__item"
-						>
-							<span className="header-contacts__icon">
-								<img src="/assets/images/icons/whatsapp.svg" alt="" title="" />
-							</span>
+							089 908 93 99
 						</a>
 					</div>
 				</div>
@@ -431,9 +408,9 @@ export default class Header extends React.Component {
 						className="navigation__catalog-button button button_catalog is-hidden-mobile"
 					>
 						<BurgerButton className="navbar-burger navbar-burger_catalog is-active" />
-						Catalog
+						Sản Phẩm
 					</button>
-					<div className="catalog-nav__title is-hidden-tablet">Catalog</div>
+					<div className="catalog-nav__title is-hidden-tablet">Sản Phẩm</div>
 					<HeadMenu
 						isMobile
 						categories={categories}

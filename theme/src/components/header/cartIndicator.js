@@ -45,7 +45,7 @@ export default class CartIndicator extends React.PureComponent {
 					<CartCount cart={cart} />
 				</span>
 				<div className="cart__info" onClick={onClick}>
-					Cart Total:{' '}
+					Giỏ hàng:{' '}
 					<b className="cart__info_total">
 						{this.state.subtotal} {settings.currency_symbol}
 					</b>

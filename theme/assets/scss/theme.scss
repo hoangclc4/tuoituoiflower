@@ -81,6 +81,11 @@ hr.separator {
     font-weight: 300;
 }
 
+.zalo-chat-widget{  
+    bottom: 11%!important;  
+    right: 2.2%!important;  
+}  
+
 .shipping-address2 {}
 
 .shipping-postalcode {}
@@ -185,3 +190,5 @@ MOBILE
 /* ================== Page CSS  ================== */
 
 @import "page.scss";
+
+@import "templatemo-style.scss";

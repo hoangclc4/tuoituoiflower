@@ -21,6 +21,7 @@ import ResetPasswordContainer from './containers/resetPassword';
 
 import { setCurrentPage } from './actions';
 import { PAGE, PRODUCT_CATEGORY, PRODUCT, RESERVED, SEARCH } from './pageTypes';
+import AboutUsContainer from './containers/aboutUs';
 
 class SwitchContainers extends React.Component {
 	constructor(props) {
@@ -81,6 +82,9 @@ class SwitchContainers extends React.Component {
 				}
 				if (locationPathname === '/checkout-success') {
 					return <CheckoutSuccessContainer />;
+				}
+				if (locationPathname === '/about') {
+					return <AboutUsContainer />;
 				} else {
 					return <PageContainer />;
 				}

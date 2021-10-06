@@ -4,7 +4,7 @@ import InputMask from 'react-input-mask';
 const InputFieldMobile = field => (
 	<div className={field.className}>
 		<InputMask
-			mask="+9 (999) 999-9999"
+			mask="9999 999 999"
 			maskPlaceholder={null}
 			placeholder={field.label}
 			{...field.input}

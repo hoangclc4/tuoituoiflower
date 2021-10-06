@@ -130,7 +130,6 @@ export default class GalleryProducts extends React.Component {
 		} = this.props;
 
 		const { products } = this.state;
-
 		return (
 			<ProductGallery
 				products={products}

@@ -23,12 +23,18 @@ class BigBanner extends Component {
 						</picture>
 					</div>
 					<div className="big-banner__text">
-						Join our community at cezerin.org
+						Liên hệ với chúng tôi tại Facebook Hoa Tươi Tươi
 						<button
 							type="button"
 							className="big-banner__button button button_gallery"
+							onClick={() =>
+								window.open(
+									'https://www.facebook.com/shophoatuoituoi',
+									'_blank'
+								)
+							}
 						>
-							Go
+							Đến
 						</button>
 					</div>
 				</div>

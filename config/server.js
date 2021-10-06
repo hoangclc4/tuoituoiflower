@@ -28,7 +28,7 @@ module.exports = {
 	ajaxBaseUrl: `${fullBaseBEUrl}/ajax`,
 
 	// Access-Control-Allow-Origin
-	storeBaseUrl: `http://localhost:3000`,
+	storeBaseUrl: fullBaseFEUrl,
 
 	// used by API
 	adminLoginUrl: '/admin/login',
@@ -68,7 +68,7 @@ module.exports = {
 	themeAssetsUploadUrl: '/assets/images',
 
 	// store UI language
-	language: 'en',
+	language: 'vi',
 
 	// used by API
 	orderStartNumber: 1000,
@@ -77,5 +77,5 @@ module.exports = {
 	// for production: recommended salRounds > 12
 	saltRounds: process.env.SALT_ROUNDS || 12,
 
-	developerMode: true
+	developerMode: false
 };

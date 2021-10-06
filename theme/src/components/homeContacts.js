@@ -31,24 +31,24 @@ class HomeContacts extends Component {
 						{themeSettings.footer_contacts[1].text}
 					</div>
 					<div className="contacts-company__worktime contacts-worktime">
-						<h3 className="contacts-worktime__title">Hours</h3>
+						<h3 className="contacts-worktime__title">Giờ Làm việc</h3>
 						<div className="contacts-worktime__table">
 							<div className="contacts-worktime__row">
-								<div className="contacts-worktime__col">Monday-Saturday:</div>
-								<div className="contacts-worktime__col">08:00-19:00</div>
+								<div className="contacts-worktime__col">T2-T7:</div>
+								<div className="contacts-worktime__col">07:00-20:00</div>
 							</div>
 							<div className="contacts-worktime__row">
-								<div className="contacts-worktime__col">Sunday:</div>
+								<div className="contacts-worktime__col">CN:</div>
 								<div className="contacts-worktime__col">09:00-17:00</div>
 							</div>
 						</div>
 						<div className="contacts-company__call">
-							<div className="contacts-company__phone">+1 (000) 000-00-00</div>
+							<div className="contacts-company__phone">089 908 93 99</div>
 							<a
-								href="tel:+10000000000"
+								href="tel:0899089399"
 								className="contacts-company__button button button_call"
 							>
-								Make Call
+								Gọi điện
 							</a>
 						</div>
 					</div>

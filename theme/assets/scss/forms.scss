@@ -115,7 +115,7 @@
 .input__radio {
     &::after {
         border: 2px solid #f2f1f1;
-        box-shadow: 0 0 0 2px #4e372a;
+        box-shadow: 0 0 0 2px $base-color;
         background-color: #f2f1f1;
         width: 13px;
         height: 13px;
@@ -130,7 +130,7 @@
 }
 
 .input__radio.active::after {
-    background-color: #4e372a;
+    background-color: $base-color;
 }
 
 .attribute-disabled,

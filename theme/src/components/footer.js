@@ -102,11 +102,11 @@ export default class Footer extends React.PureComponent {
 		return (
 			<footer className="footer">
 				<div className="footer__contacts">
-					<div className="footer__title">Contacts</div>
+					<div className="footer__title">Liên Hệ</div>
 					<Contacts contacts={themeSettings.footer_contacts} />
 				</div>
 				<div className="footer__socials">
-					<div className="footer__title">Social Networks</div>
+					<div className="footer__title">Mạng xã hội</div>
 					<SocialIcons icons={themeSettings.footer_social} />
 				</div>
 				<div className="footer__menu">

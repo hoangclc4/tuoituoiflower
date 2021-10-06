@@ -6,8 +6,8 @@ const apiWebSocketUrl = BASE_BE_URL
 	: `wss://shophoatuoituoi.com`;
 module.exports = {
 	// dashboard UI language
-	language: 'en',
+	language: 'vi',
 	apiBaseUrl: `${fullBaseUrl}/api/v1`,
 	apiWebSocketUrl,
-	developerMode: true
+	developerMode: false
 };

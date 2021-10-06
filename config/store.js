@@ -4,6 +4,6 @@ const fullBaseUrl = FULL_BASE_BE_URL || `https://shophoatuoituoi.com`;
 
 module.exports = {
 	// store UI language
-	language: 'en',
+	language: 'vi',
 	ajaxBaseUrl: `${fullBaseUrl}/ajax`
 };

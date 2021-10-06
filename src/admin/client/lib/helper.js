@@ -11,12 +11,12 @@ export const formatNumber = (number, settings) => {
 		(settings.decimal_number > 0 ? '\\D' : '$') +
 		')';
 
-	let num = floatNumber.toFixed(Math.max(0, ~~settings.decimal_number));
-
-	return (settings.decimal_separator
-		? num.replace('.', settings.decimal_separator)
-		: num
-	).replace(new RegExp(re, 'g'), '$&' + settings.thousand_separator);
+	let num = floatNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	return num;
+	// return (settings.decimal_separator
+	// 	? num.replace('.', settings.decimal_separator)
+	// 	: num
+	// ).replace(new RegExp(re, 'g'), '$&' + settings.thousand_separator);
 };
 
 const amountPattern = '{amount}';

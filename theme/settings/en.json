@@ -260,6 +260,10 @@
         "value": "instagram"
       },
       {
+        "label": "Zalo",
+        "value": "zalo"
+      },
+      {
         "label": "VK",
         "value": "vk"
       }

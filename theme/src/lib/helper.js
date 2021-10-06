@@ -8,14 +8,12 @@ export const formatNumber = (number, settings) => {
 
 	const re = `\\d(?=(\\d{${x}})+${settings.decimal_number > 0 ? '\\D' : '$'})`;
 
-	const num = floatNumber.toFixed(
-		Math.max(0, Math.floor(settings.decimal_number))
-	);
-
-	return (settings.decimal_separator
-		? num.replace('.', settings.decimal_separator)
-		: num
-	).replace(new RegExp(re, 'g'), `$&${settings.thousand_separator}`);
+	const num = floatNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	return num;
+	// return (settings.decimal_separator
+	// 	? num.replace('.', settings.decimal_separator)
+	// 	: num
+	// ).replace(new RegExp(re, 'g'), `$&${settings.thousand_separator}`);
 };
 
 const amountPattern = '{amount}';

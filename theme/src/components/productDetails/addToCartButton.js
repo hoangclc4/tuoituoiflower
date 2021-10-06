@@ -22,7 +22,7 @@ const AddToCartButton = ({
 		buttonStyle.color = themeSettings.button_addtocart_color;
 	}
 
-	let addToCartText = 'Add To Cart';
+	let addToCartText = 'Thêm vào giỏ hàng';
 
 	if (product.stock_status === 'discontinued') {
 		return (

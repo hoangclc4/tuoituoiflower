@@ -148,7 +148,7 @@ a {
         color: $custom-color;
         &:hover {
             color: #fff;
-            background: #4E372A;
+            background: $base-color;
         }
     }
     &_cart-delete {
@@ -204,7 +204,7 @@ a {
         padding: 0;
         &:hover {
             color: #fff;
-            background: #4E372A;
+            background: $base-color;
         }
     }
     &_call {
@@ -220,7 +220,7 @@ a {
         padding: 0;
         &:hover {
             color: #fff;
-            background: #4E372A;
+            background: $base-color;
         }
     }
     &_order {

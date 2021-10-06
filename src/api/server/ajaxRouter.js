@@ -604,6 +604,7 @@ ajaxRouter.post('/cart/items', (req, res, next) => {
 				return orderDraft;
 			})
 			.then(orderDraft => {
+				console.log('orderDraft', orderDraft);
 				api.orders.create(orderDraft).then(orderResponse => {
 					const orderId = orderResponse.json.id;
 					res.cookie('order_id', orderId, CART_COOKIE_OPTIONS);
