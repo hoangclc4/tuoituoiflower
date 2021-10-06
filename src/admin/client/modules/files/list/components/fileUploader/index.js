@@ -1,18 +1,34 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import messages from 'lib/text';
-import style from './style.css';
+import heic2any from 'heic2any';
 
 import Snackbar from 'material-ui/Snackbar';
 import FlatButton from 'material-ui/FlatButton';
+import style from './style.css';
 
 export default class MultiUploader extends React.Component {
-	onDrop = files => {
-		let form = new FormData();
-		files.map(file => {
+	onDrop = async files => {
+		for (let j = 0; j < files.length; j++) {
+			const form = new FormData();
+			let file = files[j];
+
+			if (file.type.match('image/heic')) {
+				let blob = new Blob([file], { type: 'image/jpeg' });
+				if (blob.type.match('image/heic')) {
+					blob = await heic2any({
+						blob,
+						toType: 'image/jpeg',
+						quality: 0.1,
+						gifInterval: 0.2
+					});
+				}
+				file = new File([blob], `${file.name.split('.')[0]}.jpeg`);
+			}
 			form.append('file', file);
-		});
-		this.props.onUpload(form);
+			this.props.onUpload(form);
+		}
+		console.log('done total:', files.length);
 	};
 
 	render() {
@@ -21,13 +37,13 @@ export default class MultiUploader extends React.Component {
 			<div>
 				<Dropzone
 					onDrop={this.onDrop}
-					multiple={true}
-					disableClick={true}
+					multiple
+					disableClick
 					ref={node => {
 						this.dropzone = node;
 					}}
 					style={{}}
-					className={style.dropzone + (uploading ? ' ' + style.uploading : '')}
+					className={style.dropzone + (uploading ? ` ${style.uploading}` : '')}
 					activeClassName={style.dropzoneActive}
 					rejectClassName={style.dropzoneReject}
 				>

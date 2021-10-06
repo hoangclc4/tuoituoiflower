@@ -114,7 +114,6 @@ export default class ProductImport extends React.Component {
 		const statusCell = document.getElementsByClassName('sheet-cell-state');
 		let errorsCounter = this.state.errors;
 		console.log('addedCategory', addedCategory);
-		console.log('product_items', product_items);
 
 		for (let i = 0; i < product_items.length; i++) {
 			const productDraft = {
@@ -136,8 +135,9 @@ export default class ProductImport extends React.Component {
 				productDraft.regular_price = product_items[i].regular_price;
 				productDraft.enabled = product_items[i].enabled;
 				productDraft.sku = product_items[i].sku;
-				productDraft.path = product_items[i].images;
-
+				productDraft.path = product_items[i].images
+					.split(/HEIC|heic/g)
+					.join('jpeg');
 				if (
 					productDraft.category_name !== '' &&
 					productDraft.name !== '' &&
@@ -166,8 +166,8 @@ export default class ProductImport extends React.Component {
 						productDraft.category_id = addedCategory[j].json.id;
 					}
 				}
-				console.log('productDraft', productDraft);
 				const newProd = await api.products.create(productDraft);
+				console.log('newProd', newProd.json.name);
 				statusCell[i].innerHTML = '&#x2713;';
 				statusCell[i].style.color = 'green';
 				imageFilesArray.push({
