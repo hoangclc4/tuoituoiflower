@@ -9,24 +9,26 @@ import style from './style.css';
 
 export default class MultiUploader extends React.Component {
 	onDrop = async files => {
+		console.log('total image need to upload:', files.length);
+		let fileLength = files.length;
 		for (let j = 0; j < files.length; j++) {
 			const form = new FormData();
 			let file = files[j];
-
 			if (file.type.match('image/heic')) {
-				let blob = new Blob([file], { type: 'image/jpeg' });
-				if (blob.type.match('image/heic')) {
-					blob = await heic2any({
-						blob,
-						toType: 'image/jpeg',
-						quality: 0.1,
-						gifInterval: 0.2
-					});
-				}
+				let blob;
+				let check = false;
+				blob = await heic2any({
+					blob: file,
+					toType: 'image/jpeg'
+				}).catch(err => {
+					check = true;
+				});
+				if (check) blob = new Blob([file], { type: 'image/jpeg' });
 				file = new File([blob], `${file.name.split('.')[0]}.jpeg`);
 			}
 			form.append('file', file);
 			this.props.onUpload(form);
+			console.log(`Only ${fileLength - j} left`);
 		}
 		console.log('done total:', files.length);
 	};
