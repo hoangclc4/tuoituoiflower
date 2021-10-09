@@ -141,6 +141,16 @@ const CheckoutSuccess = ({
 			<Fragment>
 				<section className="section-container main__header">
 					<h1 className="main__title">{text.checkoutSuccessTitle}</h1>
+					<div>
+						Sau 5 đến 20 phút sẽ có các bạn tư vấn viên liên hệ với quý khách
+						qua điện thoại hoặc Zalo để xác nhận lại mẫu sản phẩm và hướng dẫn
+						quý khách hình thức thanh toán cụ thể.
+					</div>
+					<br />
+					<span style={{ color: '#a94747' }}>
+						Lưu ý: Phí giao hàng chưa bao gồm trong số tiền thanh toán. Chúng
+						tôi sẽ gọi điện xác nhận phí giao hàng cụ thể cho quý khách
+					</span>
 
 					<div
 						dangerouslySetInnerHTML={{

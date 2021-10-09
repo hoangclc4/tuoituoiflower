@@ -152,7 +152,7 @@ class OrdersService {
 			db
 				.collection('orders')
 				.find(filter)
-				.sort({ date_placed: 1, date_created: 1 })
+				.sort({ date_placed: -1 })
 				.skip(offset)
 				.limit(limit)
 				.toArray(),

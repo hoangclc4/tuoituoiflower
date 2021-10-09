@@ -37,9 +37,17 @@ const AboutUsContainer = props => {
 							Về shop hoa tươi tươi của chúng tôi
 						</h1>
 						<p className="col-12 text-center">
-							This is about page of simple house template. You can modify and
-							use this HTML template for your website. Total 3 HTML pages
-							included in this template. Header image has a parallax effect.
+							Shop hoa Tươi Tươi là một xưởng hoa nhỏ ở Thủ Đức, TpHCM. Niềm đam
+							mê của chúng tôi là giúp những bông hoa hoàn thành sứ mệnh của
+							mình, đó là truyền đi thông điệp của niềm vui, hạnh phúc, lòng
+							biết ơn và cả lời xin lỗi đến những người xứng đáng. Mỗi bó hoa do
+							chúng tôi thực hiện đều được đảm bảo có chất lượng cao. Mỗi bông
+							hoa đều mang lại tiếng nói riêng bên trong và sự độc đáo, lộng
+							lẫy. Tất cả các bông hoa đều được kiểm tra cẩn thận và chi tiết để
+							đảm bảo sản phẩm được xuất xứ từ những nguồn đáng tin cậy và sẽ
+							tươi mới đến tay khách hàng. Với tôi, đó là niềm hạnh phúc, tự hào
+							và sứ mệnh của Shop hoa Tươi Tươi là mang tiếng nói của những bông
+							hoa đến với mọi người
 						</p>
 					</header>
 
@@ -47,7 +55,10 @@ const AboutUsContainer = props => {
 						<div className="row">
 							<div className="col-12">
 								<div className="placeholder-2">
-									<img src="assets/images/about-05.jpg" />
+									<img
+										src="assets/images/about-us1.jpeg"
+										alt="shop hoa tươi tươi"
+									/>
 								</div>
 							</div>
 						</div>
@@ -56,10 +67,13 @@ const AboutUsContainer = props => {
 						<div className="row">
 							<div className="col-lg-4">
 								<div className="tm-feature">
+									<img
+										src="assets/images/about-us3.jpeg"
+										alt="shop hoa tươi tươi"
+										style={{ width: '500px;' }}
+									/>
 									<p className="tm-feature-description">
-										Donec sed orci fermentum, convallis lacus id, tempus elit.
-										Sed eu neque accumsan, porttitor arcu a, interdum est. Donec
-										in risus eu ante.
+										Cung cấp hoa theo yêu cầu của bạn
 									</p>
 									{/* <a href="index.html" className="tm-btn tm-btn-primary">
 										Read More
@@ -68,26 +82,15 @@ const AboutUsContainer = props => {
 							</div>
 							<div className="col-lg-4">
 								<div className="tm-feature">
-									<img src="assets/images/simple-house.jpg" />
+									<img
+										src="assets/images/about-us2.jpeg"
+										alt="shop hoa tươi tươi"
+										style={{ width: '600px;' }}
+									/>
 									<p className="tm-feature-description">
-										Maecenas pretium rutrum molestie. Duis dignissim egestas
-										turpis sit. Nam sed suscipit odio. Morbi in dolor finibus,
-										consequat nisl eget.
+										Có cửa hàng riêng tại Chung Cư 4s, Linh Đông, Thủ Đức
 									</p>
 									{/* <a href="index.html" className="tm-btn tm-btn-success">
-										Read More
-									</a> */}
-								</div>
-							</div>
-							<div className="col-lg-4">
-								<div className="tm-feature">
-									<img src="assets/images/slide3.jpeg" />
-									<p className="tm-feature-description">
-										Morbi in dolor finibus, consequat nisl eget, pretium nunc.
-										Maecenas pretium rutrum molestie. Duis dignissim egestas
-										turpis sit.
-									</p>
-									{/* <a href="index.html" className="tm-btn tm-btn-danger">
 										Read More
 									</a> */}
 								</div>
@@ -99,26 +102,29 @@ const AboutUsContainer = props => {
 							<div className="col-12">
 								<div className="tm-history-inner">
 									<img
-										src="assets/images/slide2.jpeg"
-										alt="Image"
+										src="assets/images/simple-house.jpg"
+										alt="shop hoa tươi tươi"
 										className="img-fluid tm-history-img"
 									/>
 									<div className="tm-history-text">
-										<h4 className="tm-history-title">History of our shop</h4>
+										<h4 className="tm-history-title">Tầm nhìn</h4>
 										<p className="tm-mb-p">
-											Sed ligula risus, interdum aliquet imperdiet sit amet,
-											auctor sit amet justo. Maecenas posuere lorem id augue
-											interdum vehicula. Praesent sed leo eget libero ultricies
-											congue.
+											Sản phẩm của chúng tôi được thiết kế với mục đích phù hợp
+											và được làm cẩn thận. Họ yêu cầu kỹ năng và kiến thức từ
+											nhà thiết kế và nhà sản xuất, họ có thể có lịch sử, họ có
+											thể bảo tồn truyền thống, duy trì di sản hoặc hỗ trợ một
+											ngành công nghiệp. Hầu như tất cả đều có một câu chuyện để
+											kể.
 										</p>
 										<p>
 											Redistributing this template as a downloadable ZIP file on
 											any template collection site is strictly prohibited. You
 											will need to{' '}
-											<a href="https://templatemo.com/contact">
-												contact TemplateMo
+											<a href="https://www.facebook.com/shophoatuoituoi">
+												Liên hệ
 											</a>{' '}
-											for additional permissions about our templates. Thank you.
+											Nếu có vấn đề không hài lòng, quý khách cứ thoải mái liên
+											hệ với Shop
 										</p>
 									</div>
 								</div>

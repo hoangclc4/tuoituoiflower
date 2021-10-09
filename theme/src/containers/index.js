@@ -51,6 +51,7 @@ const IndexContainer = props => {
 						<div className="advantages__item" key={item.id}>
 							<img className="advantages__icon" src={item.icon} alt="" />
 							<div className="advantages__name">{item.name}</div>
+							<div className="advantages__description">{item.description}</div>
 						</div>
 					))}
 				</div>

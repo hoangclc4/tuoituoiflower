@@ -53,7 +53,6 @@ export default class ProductImport extends React.Component {
 				'id,name,category_id,category_ids,category_name,sku,images,enabled,discontinued,stock_status,stock_quantity,price,on_sale,regular_price,url'
 		};
 		const products = await api.products.list(filter);
-		console.log(products);
 
 		// delete product
 		if (products.json.data && products.json.data.length) {
@@ -87,7 +86,6 @@ export default class ProductImport extends React.Component {
 			return unique;
 		}, []);
 		const addedCategory = [];
-		console.log('categoryAdd', categoryAdd);
 		for (let i = 0; i < categoryAdd.length; i++) {
 			let checkCate = addedCategory.filter(
 				cate => cate.json.name === categoryAdd[i].category_name
@@ -113,7 +111,6 @@ export default class ProductImport extends React.Component {
 		}
 		const statusCell = document.getElementsByClassName('sheet-cell-state');
 		let errorsCounter = this.state.errors;
-		console.log('addedCategory', addedCategory);
 
 		for (let i = 0; i < product_items.length; i++) {
 			const productDraft = {
@@ -167,7 +164,7 @@ export default class ProductImport extends React.Component {
 					}
 				}
 				const newProd = await api.products.create(productDraft);
-				console.log('newProd', newProd.json.name);
+				console.log('new Product', newProd.json.name);
 				statusCell[i].innerHTML = '&#x2713;';
 				statusCell[i].style.color = 'green';
 				imageFilesArray.push({
@@ -180,8 +177,6 @@ export default class ProductImport extends React.Component {
 			}
 		}
 		await this.uploadImages();
-		console.log('done');
-		this.loader.current.style.setProperty('display', 'none');
 	};
 
 	fetchData = async () => {
@@ -478,6 +473,7 @@ export default class ProductImport extends React.Component {
 	 */
 	uploadImages() {
 		api.files.list().then(({ status, json }) => {
+			let { length } = imageFilesArray;
 			imageFilesArray.forEach(aFile => {
 				aFile.url.forEach(imageFile => {
 					json.forEach(jFile => {
@@ -516,7 +512,11 @@ export default class ProductImport extends React.Component {
 						}
 					});
 				});
+				length -= 1;
+				console.log(`import image only ${length} left`);
 			});
+			console.log('done');
+			this.loader.current.style.setProperty('display', 'none');
 		});
 	}
 

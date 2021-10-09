@@ -75,3 +75,17 @@
         background-color: $custom-color;
     }
 }
+
+.zalo-icon {
+    z-index: 2147483647;
+    border: none;
+    visibility: visible;
+    bottom: 80px;
+    right: 12px;
+    margin: 0px 12px;
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    top: auto;
+    cursor: pointer;
+}
