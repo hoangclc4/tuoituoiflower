@@ -51,14 +51,15 @@ const HomeSlider = ({ images }) => {
 					items={items}
 					lazyLoad
 					showThumbnails={false}
-					slideInterval={2000}
+					slideInterval={3000}
 					showNav={themeSettings.home_gallery_shownav === true}
 					showBullets={images.length > 1}
 					showPlayButton={false}
 					showFullscreenButton={false}
 					slideOnThumbnailHover={false}
 					renderItem={renderItem}
-					infinite={false}
+					infinite={true}
+					autoPlay
 				/>
 			</section>
 		);

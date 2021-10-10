@@ -70,7 +70,7 @@ const AboutUsContainer = props => {
 									<img
 										src="assets/images/about-us3.jpeg"
 										alt="shop hoa tươi tươi"
-										style={{ width: '500px;' }}
+										style={{ width: '500px' }}
 									/>
 									<p className="tm-feature-description">
 										Cung cấp hoa theo yêu cầu của bạn
@@ -85,7 +85,7 @@ const AboutUsContainer = props => {
 									<img
 										src="assets/images/about-us2.jpeg"
 										alt="shop hoa tươi tươi"
-										style={{ width: '600px;' }}
+										style={{ width: '600px' }}
 									/>
 									<p className="tm-feature-description">
 										Có cửa hàng riêng tại Chung Cư 4s, Linh Đông, Thủ Đức
@@ -117,12 +117,6 @@ const AboutUsContainer = props => {
 											kể.
 										</p>
 										<p>
-											Redistributing this template as a downloadable ZIP file on
-											any template collection site is strictly prohibited. You
-											will need to{' '}
-											<a href="https://www.facebook.com/shophoatuoituoi">
-												Liên hệ
-											</a>{' '}
 											Nếu có vấn đề không hài lòng, quý khách cứ thoải mái liên
 											hệ với Shop
 										</p>

@@ -473,7 +473,7 @@ export default class ProductImport extends React.Component {
 	 */
 	uploadImages() {
 		api.files.list().then(({ status, json }) => {
-			let { length } = imageFilesArray;
+			const { length } = imageFilesArray;
 			imageFilesArray.forEach(aFile => {
 				aFile.url.forEach(imageFile => {
 					json.forEach(jFile => {
@@ -512,10 +512,7 @@ export default class ProductImport extends React.Component {
 						}
 					});
 				});
-				length -= 1;
-				console.log(`import image only ${length} left`);
 			});
-			console.log('done');
 			this.loader.current.style.setProperty('display', 'none');
 		});
 	}

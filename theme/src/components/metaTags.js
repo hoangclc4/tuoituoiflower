@@ -66,7 +66,11 @@ const MetaTags = ({
 			content: ogDescription
 		});
 	}
-
+	metaArray.push({
+		property: 'keywords',
+		content:
+			'shop hoa tươi tươi, shop hoa tuoi tuoi, shophoatuoituoi, shop hoa tươi thủ đức, shop hoa tuoi thu duc, shop hoa ở thủ đức, đặt hoa tươi, thiết kế hoa theo yêu cầu'
+	});
 	const scriptJSONLD =
 		jsonld && jsonld.length > 0 ? (
 			<script type="application/ld+json">{jsonld}</script>
