@@ -31,11 +31,7 @@ class ProductImagesService {
 						let images = product.images.map(image => {
 							image.url = url.resolve(
 								generalSettings.domain,
-								settings.productsUploadUrl +
-									'/' +
-									product._id +
-									'/' +
-									image.filename
+								settings.productsUploadUrl + '/' + image.filename
 							);
 							return image;
 						});
@@ -65,7 +61,7 @@ class ProductImagesService {
 					if (imageData) {
 						let filename = imageData.filename;
 						let filepath = path.resolve(
-							settings.productsUploadPath + '/' + productId + '/' + filename
+							settings.productsUploadPath + '/' + filename
 						);
 						fse.removeSync(filepath);
 						return db
@@ -93,9 +89,7 @@ class ProductImagesService {
 
 		let uploadedFiles = [];
 		const productObjectID = new ObjectID(productId);
-		const uploadDir = path.resolve(
-			settings.productsUploadPath + '/' + productId
-		);
+		const uploadDir = path.resolve(settings.productsUploadPath);
 		fse.ensureDirSync(uploadDir);
 
 		let form = new formidable.IncomingForm();

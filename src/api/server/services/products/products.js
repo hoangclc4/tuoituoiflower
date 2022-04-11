@@ -170,9 +170,8 @@ class ProductsService {
 			name: attributeName,
 			values: allAttributesResult
 				.filter(b => b._id.name === attributeName)
-				.sort(
-					(a, b) =>
-						a._id.value > b._id.value ? 1 : b._id.value > a._id.value ? -1 : 0
+				.sort((a, b) =>
+					a._id.value > b._id.value ? 1 : b._id.value > a._id.value ? -1 : 0
 				)
 				.map(b => ({
 					name: b._id.value,
@@ -647,8 +646,8 @@ class ProductsService {
 		if (!ObjectID.isValid(id)) {
 			return Promise.reject('Invalid identifier');
 		}
-		return this.getProducts({ ids: id, limit: 1 }).then(
-			products => (products.data.length > 0 ? products.data[0] : {})
+		return this.getProducts({ ids: id, limit: 1 }).then(products =>
+			products.data.length > 0 ? products.data[0] : {}
 		);
 	}
 
@@ -687,9 +686,7 @@ class ProductsService {
 			.then(deleteResponse => {
 				if (deleteResponse.deletedCount > 0) {
 					// 2. delete directory with images
-					let deleteDir = path.resolve(
-						settings.productsUploadPath + '/' + productId
-					);
+					let deleteDir = path.resolve(settings.productsUploadPath);
 					fse.remove(deleteDir, err => {});
 				}
 				return deleteResponse.deletedCount > 0;
@@ -965,7 +962,7 @@ class ProductsService {
 	getImageUrl(domain, productId, imageFileName) {
 		return url.resolve(
 			domain,
-			`${settings.productsUploadUrl}/${productId}/${imageFileName}`
+			`${settings.productsUploadUrl}/${imageFileName}`
 		);
 	}
 
